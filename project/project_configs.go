@@ -13,6 +13,11 @@ const (
 	Closing    ProjectStatus = "Closing"
 )
 
+// project status slice for iteration
+var AllProjectStatus = []string{
+	"Initiating", "Planning", "Executing", "Closing",
+}
+
 // capture the current project type
 type ProjectType string
 
@@ -28,6 +33,19 @@ const (
 	KTLO           ProjectType = "Reliability, Scaling, and Maintenance"
 	Security       ProjectType = "Security, Privacy, and Compliance"
 )
+
+// project types slice for iteration
+var AllProjectTypes = []string{
+	"Feature",
+	"Product",
+	"Infrastructure",
+	"Platform",
+	"TechDebt",
+	"Refactoring",
+	"Migrations",
+	"KTLO",
+	"Security",
+}
 
 // the structure of a given project
 type ProjectSettings struct {
