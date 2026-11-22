@@ -12,9 +12,9 @@ type Developer struct {
 	SkillSet []string
 }
 
-var teamDevelopers []Developer // to store all the developers details in the team
+// var teamDevelopers []Developer // to store all the developers details in the team
 
-func createDeveloper() {
+func createDeveloper() Developer {
 	fmt.Println("Create a new developer profile")
 
 	var id, level int
@@ -35,6 +35,5 @@ func createDeveloper() {
 	skillset := strings.Fields(skills)
 
 	var developer Developer = Developer{id, name, level, skillset}
-	teamDevelopers = append(teamDevelopers, developer)
-
+	return developer
 }
