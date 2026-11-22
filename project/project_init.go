@@ -3,6 +3,7 @@ package project
 import (
 	"fmt"
 	"math/rand/v2"
+	"resource_scheduling/devteam"
 	"strings"
 )
 
@@ -14,21 +15,31 @@ func createProject() {
 	// record project init inputs
 	var projectName, projectType, progressStatus string
 	var teamSize, projectId int
+	var devTeam []devteam.Developer
 
-	projectId := rand.IntN(100000000)
+	projectId = rand.IntN(100000000)
 
 	fmt.Printf("Enter project name: ")
 	fmt.Scan(&projectName)
 
 	projectType = recordProjectType()
 	teamSize = devTeamSize()
-	projectStatus = "Initiating"
+	progressStatus = "Initiating"
 
+	var project = ProjectSettings{
+		ProjectID:      projectId,
+		ProjectName:    projectName,
+		ProjectType:    ProjectType(projectType),
+		ProgressStatus: ProjectStatus(progressStatus),
+		TeamSize:       teamSize,
+		DeveloperTeam:  devTeam,
+	}
 
+	Projects = append(Projects, project)
 }
 
 func recordProjectType() string {
-	
+
 	for {
 		fmt.Println("Choose the project type from the following (input the correct number):")
 
@@ -45,7 +56,7 @@ func recordProjectType() string {
 			continue
 		}
 
-		var selectedProjectType := AllProjectTypes[projTypeOption-1]
+		var selectedProjectType string = AllProjectTypes[projTypeOption-1]
 
 		return selectedProjectType
 	}
@@ -54,7 +65,7 @@ func recordProjectType() string {
 
 func devTeamSize() int {
 	fmt.Println("Required team size: ")
-	var teamSize
+	var teamSize int
 	fmt.Scan(&teamSize)
 
 	for {
