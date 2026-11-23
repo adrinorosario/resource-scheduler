@@ -2,38 +2,71 @@ package devteam
 
 import (
 	"fmt"
+	"math/rand/v2"
 	"strings"
 )
 
-type Developer struct {
-	ID       int
-	Name     string
-	Level    int
-	SkillSet []string
+// list of approved domains of expertise for a developer
+var ApprovedDomainsOfExpertise = []string{
+	"Backend",
+	"Frontend",
+	"Mobile",
+	"Infrastructure",
+	"AI/ML",
 }
 
-// var teamDevelopers []Developer // to store all the developers details in the team
+// a typical developer profile needed for projects
+type Developer struct {
+	ID              int
+	Name            string
+	Level           int
+	DomainExpertise string
+	Interests       []string
+	SkillSet        []string
+}
 
 func createDeveloper() Developer {
 	fmt.Println("Create a new developer profile")
 
 	var id, level int
-	var name, skills string
+	var name, skills, interests, domainExpertise string
+	var domainCaputure int
 
-	fmt.Println("Enter developer ID: ")
-	fmt.Scan(&id)
+	id = rand.IntN(100000000)
 
-	fmt.Println("Enter name: ")
+	fmt.Printf("Enter developer name: ")
 	fmt.Scan(&name)
 
-	fmt.Println("Enter level (integer): ")
+	fmt.Println("Enter engineering level (integer): ")
 	fmt.Scan(&level)
+
+	fmt.Println("Select domain of expertise from the following list: ")
+	for idx, val := range ApprovedDomainsOfExpertise {
+		fmt.Printf("%d:\t%d", idx+1, val)
+	}
+
+	for {
+		fmt.Printf("Enter the correct number: ")
+		fmt.Scan(&domainCaputure)
+
+		if domainCaputure > len(ApprovedDomainsOfExpertise) {
+			fmt.Println("Wrong choice. Try again...")
+			continue
+		}
+		break
+	}
+
+	domainExpertise = ApprovedDomainsOfExpertise[domainCaputure-1]
 
 	fmt.Println("Enter the skillset (languages, frameworks, tools) separated by space: ")
 	fmt.Scan(&skills)
 
-	skillset := strings.Fields(skills)
+	fmt.Println("What are your other interests (can be technical and non-technical): ")
+	fmt.Scan(&interests)
 
-	var developer Developer = Developer{id, name, level, skillset}
+	skillset := strings.Fields(skills)
+	interestsList := strings.Fields(interests)
+
+	var developer Developer = Developer{id, name, level, domainExpertise, interestsList, skillset}
 	return developer
 }
