@@ -25,7 +25,7 @@ type Developer struct {
 	SkillSet        []string
 }
 
-func createDeveloper() Developer {
+func createDeveloper() {
 	fmt.Println("Create a new developer profile")
 
 	var id, level int
@@ -68,5 +68,7 @@ func createDeveloper() Developer {
 	interestsList := strings.Fields(interests)
 
 	var developer Developer = Developer{id, name, level, domainExpertise, interestsList, skillset}
-	return developer
+
+	// append to global list of org's developers
+	OrgDevelopers = append(OrgDevelopers, developer)
 }
