@@ -11,7 +11,7 @@ import (
 
 var scanner = bufio.NewScanner(os.Stdin)
 
-func composeDevTeam() []devteam.Developer {
+func composeDevTeam(teamSize int) []devteam.Developer {
 
 	// store the chosen dev team for the project
 	// this is the slice that will be returned
@@ -38,6 +38,7 @@ func composeDevTeam() []devteam.Developer {
 	fmt.Println("Enter the ID of the required developers (press Enter after each, or 'q' to quit once done): ")
 
 	for {
+		fmt.Printf("Can choose more %d developers", teamSize)
 		fmt.Printf("> ")
 
 		// scanner.Scan() waits for the user to press enter
@@ -71,6 +72,11 @@ func composeDevTeam() []devteam.Developer {
 		}
 
 		capturedDevIdx = append(capturedDevIdx, idx)
+		teamSize = teamSize - 1
+
+		if teamSize == 0 {
+			break
+		}
 	}
 
 	if err := scanner.Err(); err != nil {

@@ -26,6 +26,9 @@ func createProject() {
 	teamSize = devTeamSize()
 	progressStatus = "Initiating"
 
+	// choose dev team for the project
+	devTeam = composeDevTeam(teamSize) // pass max size for the team
+
 	var project = ProjectSettings{
 		ProjectID:      projectId,
 		ProjectName:    projectName,
